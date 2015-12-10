@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="angular-file-upload" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^E:\\Github\\ng-file-upload\\demo\\AspNetWebApi\\AspNetWebApi\\obj\\Release\\Package\\PackageTmp$" />
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^E:\\Github\\ng-file-upload\\demo\\AspNetWebApi\\AspNetWebApi\\obj\\Release\\Package\\PackageTmp$" />
+  </parameter>
+</parameters>
