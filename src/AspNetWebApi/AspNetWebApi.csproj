@@ -85,8 +85,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App\app.js" />
-    <Content Include="App\directives\overlaySpinner.html" />
-    <Content Include="App\directives\overlaySpinner.js" />
+    <Content Include="App\directives\loading-spinner.css" />
+    <Content Include="App\directives\loading-spinner.html" />
+    <Content Include="App\directives\loading-spinner.js" />
     <Content Include="App\home\home.html" />
     <Content Include="App\home\home.js" />
     <Content Include="App\services\fileService.js" />
@@ -143,7 +144,6 @@
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Uploads\30July.jpg" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -173,7 +173,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App\modules\" />
     <Folder Include="App_Data\" />
+    <Folder Include="Uploads\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -1,4 +1,4 @@
-(function () {
+(function() {
 
   "use strict";
 
@@ -9,9 +9,10 @@
    * # HomeCtrl
    * Controller of the webApiSample
    */
-  angular.module("webApiSample")
+  angular
+    .module("webApiSample")
     .controller("HomeCtrl", [
-      "$http", "$rootScope", "fileService", "Upload", "apiUrl", function($http, $rootScope, fileService, Upload, apiUrl) {
+      "$http", "fileService", "Upload", "apiUrl", function($http, fileService, Upload, apiUrl) {
 
         var vm = this;
 
@@ -20,6 +21,9 @@
         vm.photos = [];
         vm.files = [];
         vm.previewPhoto = {};
+        vm.spinner = {
+          active: true
+        };
 
         //Functions
         function setPreviewPhoto(photo) {
@@ -27,41 +31,38 @@
         }
 
         function activate() {
-          $rootScope.spinner.on();
+          vm.spinner.active = true;
           fileService.getAll()
             .then(function(data) {
               vm.photos = data.Photos;
-              $rootScope.spinner.off();
+              vm.spinner.active = false;
               setPreviewPhoto();
             }, function(err) {
               console.log("Error status: " + err.status);
-              $rootScope.spinner.off();
+              vm.spinner.active = false;
             });
         }
 
         function uploadFiles(files) {
-          $rootScope.spinner.on();
-
           Upload.upload({
-                  url: apiUrl,
-                  data: { file: files }
+              url: apiUrl,
+              data: { file: files }
             })
             .then(function(response) {
-                  $rootScope.spinner.off();
-                  activate();
-                  setPreviewPhoto();
+
+              activate();
+              setPreviewPhoto();
             }, function(err) {
-                  console.log("Error status: " + err.status);
-                  $rootScope.spinner.off();
+              console.log("Error status: " + err.status);
+              vm.spinner.active = false;
             });;
         }
 
         function removePhoto(photo) {
-          $rootScope.spinner.on();
           fileService.deletePhoto(photo.Name)
-            .then(function () {
+            .then(function() {
               activate();
-              $rootScope.spinner.off();
+
               setPreviewPhoto();
             });
         }

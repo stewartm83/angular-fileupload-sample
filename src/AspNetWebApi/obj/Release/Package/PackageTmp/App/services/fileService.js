@@ -2,20 +2,17 @@
 
   "use strict";
 
-        /**
-         *  Service - FileService
-         * 
-         *  Service to do CRUD operations on photos
-         * 
-         */
-        angular
-          .module("webApiSample")
-          .service("fileService", [
-            "$http", "$q", "apiUrl", function($http, $q, apiUrl) {
+  /**
+   *  Service - FileService
+   *  Service to do CRUD operations on photos
+   */
+  angular
+    .module("webApiSample")
+    .service("fileService", [
+      "$http", "$q", "apiUrl", function($http, $q, apiUrl) {
 
         /**
         *   Method - GetAll
-        * 
         *   Get all photos saved on the server       
         */
         function getAll() {
@@ -32,7 +29,6 @@
 
         /**
         *   Method - GetPhoto
-        * 
         *   Get photo from server with given file name         * 
         */
         function getPhoto(fileName) {
@@ -49,7 +45,6 @@
 
         /*
         *   Method - DeletePhoto
-        * 
         *   Delete photo on the server with given file name         * 
         */
         function deletePhoto(fileName) {

@@ -4,11 +4,12 @@
       <h3>{{vm.title}}</h3>
     </div>
   </div>
-  <overlay-spinner active="spinner.active">
-    <div class="row">
-      <div class="col-md-8">
+
+  <div class="row">
+    <div class="col-md-8">
+      <loading-spinner active="vm.spinner.active">
         <ul class="list-group">
-          <li class="list-group-item list-group-item-info active">
+          <li class="list-group-item list-group-item-info">
             <div class="row">
               <div class="col-lg-5 col-md-5 col-sm-11 col-xs-10">name</div>
               <div class="col-lg-2 col-md-2 hidden-sm hidden-xs">size (kb)</div>
@@ -32,38 +33,36 @@
             </div>
           </li>
         </ul>
-        <!--<eg-photo-uploader></eg-photo-uploader>-->
+      </loading-spinner>
 
-        <form name="newPhotosForm" role="form" enctype="multipart/form-data">
-          <div class="form-group" ng-hide="hasFiles">
-            <label for="newPhotos">select and upload new photos</label>
-            <input type="file" id="newPhotos" class="uploadFile" accept="image/*" ngf-select ng-model="files" ngf-multiple="true">
-          </div>
 
-          <div class="form-group">
-            <ul class="list-inline" ng-model="vm.files">
-              <li>
-                <strong>files:</strong>
-              </li>
-              <li ng-repeat="photo in files"> {{photo.Name}}</li>
-            </ul>
-            <input class="btn btn-primary" type="button" ng-click="vm.uploadFiles(files)" value="upload">
-            <input class="btn btn-warning" type="reset" value="cancel"/>
-          </div>
-          <!--<div class="form-group" ng-show="photoManagerStatus.uploading">
-            <p class="help-block">uploading</p>
-          </div>-->
-        </form>
+      <form name="newPhotosForm" role="form" enctype="multipart/form-data">
+        <div class="form-group" ng-hide="hasFiles">
+          <label for="newPhotos">select and upload new photos</label>
+          <input type="file" id="newPhotos" class="uploadFile" accept="image/*" ngf-select ng-model="files" ngf-multiple="true">
+        </div>
 
-      </div>
-      <div class="col-md-4 hidden-sm hidden-xs" style="height: 250px; margin-bottom: 5px; width: 250px;">
-        <img ng-src="uploads/{{vm.previewPhoto.Name}}" style="max-height: 250px" ng-show="vm.previewPhoto" class="img-responsive" alt="vm.previewPhoto.name"/>
-      </div>
+        <div class="form-group">
+          <ul class="list-inline" ng-model="vm.files">
+            <li>
+              <strong>files:</strong>
+            </li>
+            <li ng-repeat="photo in files"> {{photo.Name}}</li>
+          </ul>
+          <input class="btn btn-primary" type="button" ng-click="vm.uploadFiles(files)" value="upload">
+          <input class="btn btn-warning" type="reset" value="cancel"/>
+        </div>
+      </form>
+
     </div>
-  </overlay-spinner>
+    <div class="col-md-4 hidden-sm hidden-xs" style="height: 250px; margin-bottom: 5px; width: 250px;">
+      <img ng-src="uploads/{{vm.previewPhoto.Name}}" style="max-height: 250px" ng-show="vm.previewPhoto" class="img-responsive" alt="vm.previewPhoto.name"/>
+    </div>
+  </div>
+
   <div class="row">
     <div class="col-md-9">
-      <!--<eg-app-status></eg-app-status>-->
+
     </div>
   </div>
 </div>

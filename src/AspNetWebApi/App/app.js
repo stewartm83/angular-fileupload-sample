@@ -10,17 +10,25 @@
  */
 angular
   .module("webApiSample", [
+
+    // Angular modules
     "ngAnimate",
+    "ngRoute",
     //'ngAria',
     //'ngCookies',
     //'ngMessages',
     //'ngResource',
-    "ngRoute",
-    "ngFileUpload"
     //'ngSanitize',
     //'ngTouch'
+
+    // Custom modules
+    "loading-spinner",
+
+    // 3rd Party Modules
+    "ngFileUpload"
   ])
-  .config(function ($routeProvider, $locationProvider) {
+  .config(function($routeProvider, $locationProvider) {
+
     $routeProvider
       .when("/", {
         templateUrl: "app/home/home.html",
@@ -31,17 +39,6 @@ angular
         redirectTo: "/"
       });
     $locationProvider.html5Mode(true);
-  }).run(function($rootScope) {
-
-    $rootScope.spinner = {
-      active: true,
-      on: function() {
-        this.active = true;
-      },
-      off: function() {
-        this.active = false;
-      }
-    };
 
   })
   .constant("apiUrl", "api/files/");
