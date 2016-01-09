@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
@@ -13,15 +12,15 @@ using AspNetWebApi.Models;
 namespace AspNetWebApi.Controllers
 {
   /// <summary>
-  /// This code is from a sample on MSDN  by Jay Chase
-  /// https://code.msdn.microsoft.com/AngularJS-with-Web-API-22f62a6e
+  ///   This code is from a sample on MSDN  by Jay Chase
+  ///   https://code.msdn.microsoft.com/AngularJS-with-Web-API-22f62a6e
   /// </summary>
   public class FilesController : ApiController
-    {
+  {
     private readonly string workingFolder = HttpRuntime.AppDomainAppPath + @"\Uploads";
 
     /// <summary>
-    /// Get all photos
+    ///   Get all photos
     /// </summary>
     /// <returns></returns>
     public async Task<IHttpActionResult> Get()
@@ -33,22 +32,23 @@ namespace AspNetWebApi.Controllers
       await Task.Factory.StartNew(() =>
       {
         photos = photoFolder.EnumerateFiles()
-                                    .Where(fi => new[] { ".jpg", ".bmp", ".png", ".gif", ".tiff" }.Contains(fi.Extension.ToLower()))
-                                    .Select(fi => new PhotoViewModel
-                                    {
-                                      Name = fi.Name,
-                                      Created = fi.CreationTime,
-                                      Modified = fi.LastWriteTime,
-                                      Size = fi.Length / 1024
-                                    })
-                                    .ToList();
+          .Where(fi => new[] {".jpg", ".bmp", ".png", ".gif", ".tiff"}
+            .Contains(fi.Extension.ToLower()))
+          .Select(fi => new PhotoViewModel
+          {
+            Name = fi.Name,
+            Created = fi.CreationTime,
+            Modified = fi.LastWriteTime,
+            Size = fi.Length/1024
+          })
+          .ToList();
       });
-    
-      return Ok(new {Photos = photos });
 
+      return Ok(new {Photos = photos});
     }
+
     /// <summary>
-    /// Delete photo
+    ///   Delete photo
     /// </summary>
     /// <param name="fileName"></param>
     /// <returns></returns>
@@ -63,23 +63,34 @@ namespace AspNetWebApi.Controllers
       try
       {
         var filePath = Directory.GetFiles(workingFolder, fileName)
-                 .FirstOrDefault();
+          .FirstOrDefault();
 
         await Task.Factory.StartNew(() =>
-        { if (filePath != null) File.Delete(filePath); });
+        {
+          if (filePath != null)
+            File.Delete(filePath);
+        });
 
-        var result = new PhotoActionResult { Successful = true, Message = fileName + "deleted successfully" };
-        return Ok(new { message = result.Message });
+        var result = new PhotoActionResult
+        {
+          Successful = true,
+          Message = fileName + "deleted successfully"
+        };
+        return Ok(new {message = result.Message});
       }
       catch (Exception ex)
       {
-        var result = new PhotoActionResult { Successful = false, Message = "error deleting fileName " + ex.GetBaseException().Message };
+        var result = new PhotoActionResult
+        {
+          Successful = false,
+          Message = "error deleting fileName " + ex.GetBaseException().Message
+        };
         return BadRequest(result.Message);
       }
     }
 
     /// <summary>
-    /// Add a photo
+    ///   Add a photo
     /// </summary>
     /// <returns></returns>
     public async Task<IHttpActionResult> Add()
@@ -95,32 +106,33 @@ namespace AspNetWebApi.Controllers
 
         await Request.Content.ReadAsMultipartAsync(provider);
 
-        var photos = provider.FileData.Select(file => new FileInfo(file.LocalFileName)).Select(fileInfo => new PhotoViewModel
-        {
-          Name = fileInfo.Name,
-          Created = fileInfo.CreationTime,
-          Modified = fileInfo.LastWriteTime,
-          Size = fileInfo.Length / 1024
-        }).ToList();
-        return Ok(new { Message = "Photos uploaded ok", Photos = photos });
+        var photos =
+          provider.FileData
+            .Select(file => new FileInfo(file.LocalFileName))
+            .Select(fileInfo => new PhotoViewModel
+            {
+              Name = fileInfo.Name,
+              Created = fileInfo.CreationTime,
+              Modified = fileInfo.LastWriteTime,
+              Size = fileInfo.Length/1024
+            }).ToList();
+        return Ok(new {Message = "Photos uploaded ok", Photos = photos});
       }
       catch (Exception ex)
       {
         return BadRequest(ex.GetBaseException().Message);
       }
-
-
     }
 
     /// <summary>
-    /// Check if file exists on disk
+    ///   Check if file exists on disk
     /// </summary>
     /// <param name="fileName"></param>
     /// <returns></returns>
     public bool FileExists(string fileName)
     {
       var file = Directory.GetFiles(workingFolder, fileName)
-                          .FirstOrDefault();
+        .FirstOrDefault();
 
       return file != null;
     }
