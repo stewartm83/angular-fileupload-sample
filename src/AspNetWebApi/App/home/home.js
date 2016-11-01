@@ -43,15 +43,15 @@
         }
 
         function uploadFiles(files) {
+          vm.spinner.active = true;
           Upload.upload({
               url: apiUrl,
               data: { file: files }
             })
             .then(function(response) {
-
               activate();
               setPreviewPhoto();
-       
+              vm.spinner.active = false;
             }, function(err) {
               console.log("Error status: " + err.status);
               vm.spinner.active = false;
