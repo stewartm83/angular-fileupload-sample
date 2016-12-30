@@ -32,7 +32,7 @@ namespace AspNetWebApi.Controllers
             await Task.Factory.StartNew(() =>
             {
                 photos = photoFolder.EnumerateFiles()
-                    .Where(fi => new[] {".jpg", ".bmp", ".png", ".gif", ".tiff"}
+                    .Where(fi => new[] { ".jpeg", ".jpg", ".bmp", ".png", ".gif", ".tiff"}
                         .Contains(fi.Extension.ToLower()))
                     .Select(fi => new PhotoViewModel
                     {
@@ -103,7 +103,8 @@ namespace AspNetWebApi.Controllers
             try
             {
                 var provider = new CustomMultipartFormDataStreamProvider(workingFolder);
-                await Request.Content.ReadAsMultipartAsync(provider);
+                //await Request.Content.ReadAsMultipartAsync(provider);
+                await Task.Run(async () => await Request.Content.ReadAsMultipartAsync(provider));
 
                 var photos = new List<PhotoViewModel>();
 
