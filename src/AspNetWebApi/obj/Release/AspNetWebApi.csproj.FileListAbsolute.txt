@@ -1,8 +1,0 @@
-D:\Github\angular-fileupload-sample\src\AspNetWebApi\bin\AspNetWebApi.dll.config
-D:\Github\angular-fileupload-sample\src\AspNetWebApi\bin\AspNetWebApi.dll
-D:\Github\angular-fileupload-sample\src\AspNetWebApi\bin\AspNetWebApi.pdb
-D:\Github\angular-fileupload-sample\src\AspNetWebApi\bin\System.Web.Cors.dll
-D:\Github\angular-fileupload-sample\src\AspNetWebApi\bin\System.Web.Http.Cors.dll
-D:\Github\angular-fileupload-sample\src\AspNetWebApi\bin\System.Web.Http.Cors.xml
-D:\Github\angular-fileupload-sample\src\AspNetWebApi\obj\Release\AspNetWebApi.dll
-D:\Github\angular-fileupload-sample\src\AspNetWebApi\obj\Release\AspNetWebApi.pdb
