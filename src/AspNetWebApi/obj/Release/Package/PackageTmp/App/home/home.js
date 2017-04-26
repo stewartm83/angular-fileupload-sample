@@ -11,13 +11,12 @@
    */
   angular
     .module("webApiSample")
-    .controller("HomeCtrl", [
-      "$http", "fileService", "Upload", "apiUrl", function($http, fileService, Upload, apiUrl) {
+    .controller("HomeCtrl", [ "$window",
+      "fileService", "Upload", "apiUrl", function($window, fileService, Upload, apiUrl) {
 
         var vm = this;
 
         //Variables
-        vm.title = "Photos";
         vm.photos = [];
         vm.files = [];
         vm.previewPhoto = {};
@@ -33,7 +32,7 @@
         function activate() {
           vm.spinner.active = true;
           fileService.getAll()
-            .then(function(data) {
+            .then(function (data) {
               vm.photos = data.Photos;
               vm.spinner.active = false;
               setPreviewPhoto();
@@ -44,18 +43,21 @@
         }
 
         function uploadFiles(files) {
+          vm.spinner.active = true;
           Upload.upload({
               url: apiUrl,
               data: { file: files }
             })
             .then(function(response) {
-
               activate();
               setPreviewPhoto();
+              vm.spinner.active = false;
             }, function(err) {
               console.log("Error status: " + err.status);
               vm.spinner.active = false;
-            });;
+            });
+
+          $window.location.reload();
         }
 
         function removePhoto(photo) {

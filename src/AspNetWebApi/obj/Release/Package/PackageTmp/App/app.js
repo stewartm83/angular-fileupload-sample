@@ -38,7 +38,9 @@ angular
       .otherwise({
         redirectTo: "/"
       });
+
     $locationProvider.html5Mode(true);
+
 
   })
   .constant("apiUrl", "api/files/");
