@@ -14,10 +14,10 @@
           var deferred = $q.defer();
 
           $http.get(apiUrl)
-            .success(function(result) {
+            .then(function(result) {
               deferred.resolve(result);
-            })
-            .error(function(error) {
+            },
+            function errorCallback(error) {
               deferred.reject(error);
             });
 
@@ -30,10 +30,10 @@
           var deferred = $q.defer();
 
           $http.get(apiUrl + fileName)
-            .success(function(result) {
+            .then(function(result) {
               deferred.resolve(result);
-            })
-            .error(function(error) {
+            },
+            function errorCallback(error) {
               deferred.reject(error);
             });
 
@@ -46,9 +46,10 @@
           var deferred = $q.defer();
 
           $http.delete(apiUrl, { params: { fileName: fileName } })
-            .success(function(result) {
+            .then(function(result) {
               deferred.resolve(result);
-            }).error(function(error) {
+            },
+            function errorCallback(error) {
               deferred.reject(error);
             });
 
