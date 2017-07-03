@@ -33,7 +33,7 @@
           vm.spinner.active = true;
           fileService.getAll()
             .then(function (data) {
-              vm.photos = data.Photos;
+              vm.photos = data.data.Photos;
               vm.spinner.active = false;
               setPreviewPhoto();
             }, function(err) {
@@ -57,7 +57,7 @@
               vm.spinner.active = false;
             });
 
-          $window.location.reload();
+          
         }
 
         function removePhoto(photo) {
